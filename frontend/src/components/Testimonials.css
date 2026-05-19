@@ -1,0 +1,118 @@
+.testimonials {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+  overflow: hidden;
+}
+
+/* ── Carousel ── */
+.testimonials-carousel {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.testimonials-track {
+  position: relative;
+  min-height: 320px;
+}
+
+/* ── Card ── */
+.testimonial-card {
+  position: absolute;
+  inset: 0;
+  padding: 44px 40px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  opacity: 0;
+  transform: translateX(40px) scale(0.96);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.testimonial-card.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Emoji */
+.testimonial-emoji {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+}
+
+/* Stars */
+.testimonial-stars {
+  font-size: 1.1rem;
+  color: var(--peach);
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+/* Text */
+.testimonial-text {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* Author */
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.author-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.author-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ── Dots ── */
+.testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(167, 139, 250, 0.2);
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+
+.dot:hover {
+  background: rgba(167, 139, 250, 0.4);
+}
+
+.dot.active {
+  background: var(--gradient-primary);
+  width: 28px;
+  border-radius: 5px;
+  box-shadow: 0 0 12px var(--pink-glow);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .testimonials { padding: 70px 0; }
+  .testimonial-card { padding: 32px 24px; }
+  .testimonials-track { min-height: 350px; }
+}

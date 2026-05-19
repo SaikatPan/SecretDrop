@@ -1,6 +1,8 @@
 import Hero from '../components/Hero';
 import GiftCatalog from '../components/GiftCatalog';
 import HowItWorks from '../components/HowItWorks';
+import Testimonials from '../components/Testimonials';
+import CTA from '../components/CTA';
 
 function Home() {
   return (
@@ -8,6 +10,8 @@ function Home() {
       <Hero />
       <GiftCatalog />
       <HowItWorks />
+      <Testimonials />
+      <CTA />
     </main>
   );
 }

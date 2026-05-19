@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import './Auth.css';
@@ -12,6 +12,30 @@ function SignUp() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  // Password strength calculation
+  const passwordStrength = useMemo(() => {
+    const pwd = form.password;
+    if (!pwd) return { score: 0, label: '', color: 'transparent' };
+
+    let score = 0;
+    if (pwd.length >= 6) score++;
+    if (pwd.length >= 10) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
+    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+    const levels = [
+      { label: 'Weak', color: '#fb7185' },
+      { label: 'Weak', color: '#fb7185' },
+      { label: 'Fair', color: '#fdba74' },
+      { label: 'Good', color: '#a78bfa' },
+      { label: 'Strong', color: '#86efac' },
+      { label: 'Very Strong', color: '#34d399' },
+    ];
+
+    return { score, ...levels[score] };
+  }, [form.password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,8 +69,20 @@ function SignUp() {
 
   return (
     <main className="auth-page" id="signup-page">
+      {/* Background orbs */}
+      <div className="auth-orbs" aria-hidden="true">
+        <div className="auth-orb auth-orb-1"></div>
+        <div className="auth-orb auth-orb-2"></div>
+      </div>
+
+      {/* Floating decorations */}
+      <span className="auth-deco auth-deco-1" aria-hidden="true">✨</span>
+      <span className="auth-deco auth-deco-2" aria-hidden="true">🎁</span>
+      <span className="auth-deco auth-deco-3" aria-hidden="true">🎀</span>
+      <span className="auth-deco auth-deco-4" aria-hidden="true">💌</span>
+
       <div className="auth-container">
-        <div className="auth-card glass-card">
+        <div className="auth-card">
           <div className="auth-header">
             <span className="auth-icon">✨</span>
             <h1 className="auth-title">Create Account</h1>
@@ -99,6 +135,22 @@ function SignUp() {
                 required
                 minLength={6}
               />
+              {form.password && (
+                <div className="password-strength">
+                  <div className="strength-bar-track">
+                    <div
+                      className="strength-bar-fill"
+                      style={{
+                        width: `${(passwordStrength.score / 5) * 100}%`,
+                        background: passwordStrength.color,
+                      }}
+                    />
+                  </div>
+                  <span className="strength-label" style={{ color: passwordStrength.color }}>
+                    {passwordStrength.label}
+                  </span>
+                </div>
+              )}
             </div>
 
             <button
@@ -107,7 +159,7 @@ function SignUp() {
               disabled={loading}
               id="signup-btn"
             >
-              {loading ? 'Creating Account...' : 'Sign Up'}
+              {loading ? '✨ Creating Account...' : '🚀 Sign Up'}
             </button>
           </form>
 

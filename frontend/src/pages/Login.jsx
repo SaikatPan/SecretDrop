@@ -41,8 +41,20 @@ function Login() {
 
   return (
     <main className="auth-page" id="login-page">
+      {/* Background orbs */}
+      <div className="auth-orbs" aria-hidden="true">
+        <div className="auth-orb auth-orb-1"></div>
+        <div className="auth-orb auth-orb-2"></div>
+      </div>
+
+      {/* Floating decorations */}
+      <span className="auth-deco auth-deco-1" aria-hidden="true">🎁</span>
+      <span className="auth-deco auth-deco-2" aria-hidden="true">✨</span>
+      <span className="auth-deco auth-deco-3" aria-hidden="true">💝</span>
+      <span className="auth-deco auth-deco-4" aria-hidden="true">🎀</span>
+
       <div className="auth-container">
-        <div className="auth-card glass-card">
+        <div className="auth-card">
           <div className="auth-header">
             <span className="auth-icon">🔐</span>
             <h1 className="auth-title">Welcome Back</h1>
@@ -88,7 +100,7 @@ function Login() {
               disabled={loading}
               id="login-btn"
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? '✨ Logging in...' : '🔓 Login'}
             </button>
           </form>
 
